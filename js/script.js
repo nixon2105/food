@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
+  //tabs
+
   const tabs = document.querySelectorAll('.tabheader__item');
   const tabsContent = document.querySelectorAll('.tabcontent');
   const tabsParent = document.querySelector('.tabheader__items');
@@ -35,4 +37,26 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+
+  //timer
+
+  const dedline = '2022-02-21';
+
+  const getTimeRemaining = (endtime) => {
+    const t = Date.parse(endtime) - Date.parse(new Date()),
+    const days = Math.floor(t / (1000 * 60 * 60 * 24)),
+    const hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+    const minutes = Math.floor((t / 1000/60) % 60),
+    const seconds = Math.floor((t / 1000) % 60);
+
+   return {
+     'total' : t,
+     'days' : days,
+     'hours' : hours,
+     'minutes': minutes,
+     'seconds': seconds
+   } 
+  };
+
+  
 });
