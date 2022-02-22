@@ -63,6 +63,20 @@ window.addEventListener('DOMContentLoaded', () => {
       days = timer.querySelector('#days'),
       hours = timer.querySelector('#hours'),
       minutes = timer.querySelector('#minutes'),
-      seconds = timer.querySelector('#seconds');
+      seconds = timer.querySelector('#seconds'),
+      timeInterval = setInterval(upDateClock, 1000);
+
+    const upDateClock = () => {
+      const t = getTimeRemaining(endtime);
+
+      days.innerHTML = t.days;
+      hours.innerHTML = t.hours;
+      minutes.innerHTML = t.minutes;
+      seconds.innerHTML = t.seconds;
+
+      if (t.total <= 0) {
+        clearInterval(timeInterval);
+      }
+    };
   };
 });
