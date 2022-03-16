@@ -139,5 +139,5 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  wind.addEventListener('scroll', showModalByScroll);
+  window.addEventListener('scroll', showModalByScroll);
 });
