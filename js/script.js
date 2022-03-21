@@ -255,14 +255,7 @@ window.addEventListener('DOMContentLoaded', () => {
       formData.forEach(function (value, key) {
         object[key] = value;
       });
-
-      fetch('server.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(object),
-      })
+      postData('http://localhost:3000/requests', JSON.stringify(object))
         .then((data) => {
           console.log(data);
           showThanksModal(message.success);
