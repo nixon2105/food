@@ -181,15 +181,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  const getResource = async (url, data) => {
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-    }
-    return await res.json();
-  };
-
   getResource('http://localhost:3000/menu').then((data) => {
     data.forEach(({ img, altimg, title, descr, price }) => {
       new MenuCard(
@@ -241,7 +232,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   const postData = async (url, data) => {
-    const res = await fetch(url, {
+    let res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -251,6 +242,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
     return await res.json();
   };
+
+  async function getResource(url) {
+    let res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+    }
+
+    return await res.json();
+  }
 
   function bindPostData(form) {
     form.addEventListener('submit', (e) => {
@@ -304,5 +305,31 @@ window.addEventListener('DOMContentLoaded', () => {
       prevModalDialog.classList.remove('hide');
       closeModal();
     }, 4000);
+  }
+
+  //Slider
+
+  const slides = document.querySelectorAll('.offer__slide');
+
+  const prev = document.querySelector('.offer__slider-prev');
+  const next = document.querySelector('.offer__slider-next');
+
+  let slideIndex = 1;
+
+  function showSlides(n) {
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    slides.forEach((item) => (item.style.display = 'none'));
+
+    slides[slideIndex - 1].style.display = 'block';
+  }
+
+  function plusSlides(n) {
+    showSlides((slideIndex += n));
   }
 });
