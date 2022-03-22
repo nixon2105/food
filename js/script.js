@@ -330,8 +330,6 @@ window.addEventListener('DOMContentLoaded', () => {
     current.textContent = slideIndex;
   }
 
-  //Courusel
-
   slidesField.style.width = 100 * slides.length + '%';
   slidesField.style.display = 'flex';
   slidesField.style.transition = '0.5s all';
@@ -344,47 +342,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
   slider.style.position = 'relative';
 
-  const indicators = document.createElement('ol');
-  const dots = [];
+  const indicators = document.createElement('ol'),
+    dots = [];
   indicators.classList.add('carousel-indicators');
   indicators.style.cssText = `
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 15;
-      display: flex;
-      justify-content: center;
-      margin-right: 15%;
-      margin-left: 15%;
-      list-style: none;
-  `;
-
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+`; // Если хотите - добавьте в стили, но иногда у нас нет доступа к стилям
   slider.append(indicators);
 
   for (let i = 0; i < slides.length; i++) {
     const dot = document.createElement('li');
     dot.setAttribute('data-slide-to', i + 1);
     dot.style.cssText = `
-      box-sizing: content-box;
-      flex: 0 1 auto;
-      width: 30px;
-      height: 6px;
-      margin-right: 3px;
-      margin-left: 3px;
-      cursor: pointer;
-      background-color: #fff;
-      background-clip: padding-box;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      opacity: 0.5;
-      transition: opacity 0.6s ease;
+        box-sizing: content-box;
+        flex: 0 1 auto;
+        width: 30px;
+        height: 6px;
+        margin-right: 3px;
+        margin-left: 3px;
+        cursor: pointer;
+        background-color: #fff;
+        background-clip: padding-box;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        opacity: .5;
+        transition: opacity .6s ease;
     `;
-
     if (i == 0) {
       dot.style.opacity = 1;
     }
-
     indicators.append(dot);
     dots.push(dot);
   }
