@@ -542,9 +542,26 @@ window.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('ratio', 1.375);
   }
 
+  initLocalSettings();
+
+  function initLocalSettings(selector, activeClass) {
+    const elements = document.querySelectorAll(selector);
+
+    elements.forEach((elem) => {
+      elem.clases.remove(activeClass);
+
+      if (elem.getAttribute('id') === localStorage.getItem('sex')) {
+        elem.clases.add(activeClass);
+      }
+      if (elem.getAttribute('data-ratio') === localStorage.getItem('ratio')) {
+        elem.clases.add(activeClass);
+      }
+    });
+  }
+
   function calcTotal() {
     if (!sex || !height || !weight || !age || !ratio) {
-      result.textContent = '____'; // Можете придумать что угодно
+      result.textContent = '____';
       return;
     }
     if (sex === 'female') {
