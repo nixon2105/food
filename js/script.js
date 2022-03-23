@@ -542,23 +542,6 @@ window.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('ratio', 1.375);
   }
 
-  initLocalSettings();
-
-  function initLocalSettings(selector, activeClass) {
-    const elements = document.querySelectorAll(selector);
-
-    elements.forEach((elem) => {
-      elem.clases.remove(activeClass);
-
-      if (elem.getAttribute('id') === localStorage.getItem('sex')) {
-        elem.clases.add(activeClass);
-      }
-      if (elem.getAttribute('data-ratio') === localStorage.getItem('ratio')) {
-        elem.clases.add(activeClass);
-      }
-    });
-  }
-
   function calcTotal() {
     if (!sex || !height || !weight || !age || !ratio) {
       result.textContent = '____';
@@ -577,8 +560,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
   calcTotal();
 
-  function getStaticInformation(parentSelector, activeClass) {
-    const elements = document.querySelectorAll(`${parentSelector} div`);
+  function initLocalSettings(selector, activeClass) {
+    const elements = document.querySelectorAll(selector);
+
+    elements.forEach((elem) => {
+      elem.classList.remove(activeClass);
+      if (elem.getAttribute('id') === localStorage.getItem('sex')) {
+        elem.classList.add(activeClass);
+      }
+      if (elem.getAttribute('data-ratio') === localStorage.getItem('ratio')) {
+        elem.classList.add(activeClass);
+      }
+    });
+  }
+
+  initLocalSettings('#gender div', 'calculating__choose-item_active');
+  initLocalSettings(
+    '.calculating__choose_big div',
+    'calculating__choose-item_active'
+  );
+
+  function getStaticInformation(selector, activeClass) {
+    const elements = document.querySelectorAll(selector);
 
     elements.forEach((elem) => {
       elem.addEventListener('click', (e) => {
@@ -601,9 +604,9 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  getStaticInformation('#gender', 'calculating__choose-item_active');
+  getStaticInformation('#gender div', 'calculating__choose-item_active');
   getStaticInformation(
-    '.calculating__choose_big',
+    '.calculating__choose_big div',
     'calculating__choose-item_active'
   );
 
@@ -616,7 +619,6 @@ window.addEventListener('DOMContentLoaded', () => {
       } else {
         input.style.border = 'none';
       }
-
       switch (input.getAttribute('id')) {
         case 'height':
           height = +input.value;
