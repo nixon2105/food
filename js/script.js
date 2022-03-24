@@ -18,6 +18,6 @@ window.addEventListener('DOMContentLoaded', function () {
   timer();
   cards();
   calc();
-  forms();
+  forms(modalTimerId);
   slider();
 });
